@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+Books & Authors
+{% endblock %}
+
+
+{% block content %}
+    <div class="mt-5">
+        <h1>{{ first_name }} {{ last_name }}</h1>
+        <h3>ID: {{ id }}</h3>
+        <div class="row">
+            <div class="col-3">
+                <h3>Notes:</h3>
+            </div>
+            <div class="col-9">
+                <textarea readonly class="form-control" name="textarea" id="tabook" rows="6">{{ notes }} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni dolorem deserunt dolores aut, ratione porro nobis possimus facere hic eum consequuntur voluptates deleniti repudiandae ut excepturi eligendi inventore pariatur voluptas.</textarea>
+            </div>
+        </div>
+        <h3>Books:</h3>
+        <div>
+            <ul>
+                {% for book in books %}
+                <li class="text-white">{{ book.title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <form action="/authors/{{ id }}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="form-group col">
+                    <select name="new_title_option" id="new_title_option" class="form-control"placeholder="-select an author-">
+                        {% for book in book_list %}
+                        <option   placeholder="-select a book-">{{ book.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

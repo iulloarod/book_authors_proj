@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Books & Authors
+{% endblock %}
+
+
+{% block content %}
+    <div class="row mt-5">
+        <div class="col">
+            <h1>Add a Book</h1>
+            <form action="" method="POST"> 
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-2 my-3 text-white">
+                        <p>Title</p>
+                        <br>
+                        <p>Description</p>
+                    </div>
+                    <div class="form-group col my-3">
+                        <input type="text" class="form-control" name="new_title" id="new_title" placeholder="Insert a Title">
+                        <br>
+                        <input type="textarea" class="form-control" name="new_desc" id="new_desc" placeholder="Insert a Description">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+        <table class="table table-hover col text-white mt-2 mx-2">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in book_tables %}
+                <tr>
+                    <th scope="row"> {{ book.id }}</th>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.desc }}</td>
+                    <td><a class="link-info" href="/books/{{ book.id }}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        
+{% endblock %}
